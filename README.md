@@ -3,7 +3,7 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![TODO: Update the path with the name of your diagram](C:\Users\sbalachandran\OneDrive - VMware, Inc\VMwareCorp\Desktop\Cybersecurity HW\Elk.png)
+https://github.com/saib2018/Cybersec2021/blob/main/Diagrams/Elk.png
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat. All the files are located under /etc/ansible
 
@@ -107,5 +107,3 @@ SSH into the control node and follow the steps below:
 - Hosts file in ansible contains the hosts for which the playbook would be run against /etc/ansible/hosts
 - Navigate to the following URL to confirm if the Kibana is running - http://137.135.24.201:5601/app/kibana (Public IP of the ELK server)
 =======
-
->>>>>>> bc2c7564619389d88a46f0bc3b54326cc6495512
