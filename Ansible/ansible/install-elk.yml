@@ -1,13 +1,13 @@
 ---
 - name: Configure Elk VM with Docker
   hosts: elk
-  remote_user: Elkadmin
+  remote_user: WebAdmin
   become: true
   tasks:
     # Use apt module
     - name: Install docker.io
       apt:
-        update_cache: no
+        update_cache: yes
         name: docker.io
         state: present
 
