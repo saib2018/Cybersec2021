@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Automated ELK Stack Deployment
 
 The files in this repository were used to configure the network depicted below.
@@ -105,3 +106,6 @@ SSH into the control node and follow the steps below:
 - Playbooks are located in the /etc/ansible path and has yml extension.
 - Hosts file in ansible contains the hosts for which the playbook would be run against /etc/ansible/hosts
 - Navigate to the following URL to confirm if the Kibana is running - http://137.135.24.201:5601/app/kibana (Public IP of the ELK server)
+=======
+
+>>>>>>> bc2c7564619389d88a46f0bc3b54326cc6495512
