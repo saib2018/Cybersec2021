@@ -7,9 +7,9 @@ https://github.com/saib2018/Cybersec2021/blob/main/Diagrams/Elk.png
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat. All the files are located under /etc/ansible
 
-  - install-elk.yml
-  - filebeat-playbook.yml
-  - metricbeat-playbook.yml
+  - install-elk.yml - https://github.com/saib2018/Cybersec2021/blob/main/Ansible/ansible/install-elk.yml
+  - filebeat-playbook.yml - https://github.com/saib2018/Cybersec2021/blob/main/Ansible/ansible/filebeat-playbook.yml
+  - metricbeat-playbook.yml - https://github.com/saib2018/Cybersec2021/blob/main/Ansible/ansible/metricbeat-playbook.yml 
 
 This document contains the following details:
 - Description of the Topology
@@ -68,16 +68,26 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
 - Extensibility – With few modifications, playbooks could be used to deploy other types of servers 
 - Automation – For testing and debugging purposes, it is easier to create an instance and destroy the instance after task is completed.
 
+To deploy the playbook, following steps were performed
+
+ - SSH using remote user into Jumpbox provisioner 40.76.116.68
+ - Ran the command "docker container list -a" to identify the containers running
+ - Used the command "docker container start {container-name}" and "docker container attach {container-name}" to log into the ansible container
+ - Confirmed that ansible host files had the required server IPs listed which were target machines
+ - Confirmed that ansible configuration files had the remote user setup to the admin user of the target machine
+ - After preparing the playbook file as described below, ran the playbook using the command ansible-playbook filebeat-playbook.yml which is located in /etc/ansible folder
+
 The playbook implements the following tasks:
 
 - The header of the Ansible playbook can specify a different group of machines as well as a different remote user
 - Before you can run the elk container, we need to increase the memory as this is a system requirement for the ELK container
 - The playbook should then install the following services: docker.io, python3-pip and docker, which is the Docker Python pip module
 - After Docker is installed, download and run the sebp/elk:761 container.The container should be started with these published ports: 5601:5601, 9200:9200 and 5044:5044
+- Complete Filebeat-Playbook listed here - https://github.com/saib2018/Cybersec2021/blob/main/Ansible/ansible/filebeat-playbook.yml
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](C:\Users\sbalachandran\OneDrive - VMware, Inc\VMwareCorp\Desktop\Cybersecurity HW\dockerps.png)
+https://github.com/saib2018/Cybersec2021/blob/main/Diagrams/dockerps.PNG
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -106,4 +116,40 @@ SSH into the control node and follow the steps below:
 - Playbooks are located in the /etc/ansible path and has yml extension.
 - Hosts file in ansible contains the hosts for which the playbook would be run against /etc/ansible/hosts
 - Navigate to the following URL to confirm if the Kibana is running - http://137.135.24.201:5601/app/kibana (Public IP of the ELK server)
-=======
+  https://github.com/saib2018/Cybersec2021/blob/main/Diagrams/Kibana1.PNG
+
+- The easiest way to copy the playbooks is to use Git:
+
+- cd /etc/ansible
+-  mkdir files
+# Clone Repository 
+- git clone https://github.com/saib2018/Cybersec2021.git
+# Move Playbooks and hosts file Into `/etc/ansible`
+$ cp Cybersec2021/playbooks/* .
+$ cp Cybersec2021/files/* ./files
+This copies the playbook files to the correct place.
+
+
+- Next, you must create a hosts file to specify which VMs to run each playbook on. Run the commands below:
+
+cd /etc/ansible
+cat > hosts <<EOF
+[webservers]
+10.0.0.5
+10.0.0.6
+10.0.0.7
+
+[elk]
+10.1.0.4
+EOF
+
+- After this, the commands below run the playbook:
+
+cd /etc/ansible
+ansible-playbook install_elk.yml 
+ansible-playbook filebeat-playbook.yml 
+ansible-playbook metricbeat-playbook.yml
+
+- To verify success, wait five minutes to give ELK time to start up.
+- Then, run: curl http://10.1.0.4:5601. This is the address of Kibana. If the installation succeeded, this command should print HTML to the console.
+
