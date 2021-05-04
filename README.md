@@ -120,18 +120,20 @@ SSH into the control node and follow the steps below:
 
 - The easiest way to copy the playbooks is to use Git:
 
-- cd /etc/ansible
--  mkdir files
-# Clone Repository 
-- git clone https://github.com/saib2018/Cybersec2021.git
-# Move Playbooks and hosts file Into `/etc/ansible`
+```
+$ cd /etc/ansible
+$ mkdir files
+Clone Repository 
+$ git clone https://github.com/saib2018/Cybersec2021.git
+Move Playbooks and hosts file Into `/etc/ansible`
 $ cp Cybersec2021/playbooks/* .
 $ cp Cybersec2021/files/* ./files
+
+```
 This copies the playbook files to the correct place.
-
-
 - Next, you must create a hosts file to specify which VMs to run each playbook on. Run the commands below:
 
+```
 cd /etc/ansible
 cat > hosts <<EOF
 [webservers]
@@ -143,12 +145,17 @@ cat > hosts <<EOF
 10.1.0.4
 EOF
 
+```
+
 - After this, the commands below run the playbook:
 
+```
 cd /etc/ansible
 ansible-playbook install_elk.yml 
 ansible-playbook filebeat-playbook.yml 
 ansible-playbook metricbeat-playbook.yml
+
+```
 
 - To verify success, wait five minutes to give ELK time to start up.
 - Then, run: curl http://10.1.0.4:5601. This is the address of Kibana. If the installation succeeded, this command should print HTML to the console.
