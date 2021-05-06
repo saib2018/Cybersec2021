@@ -116,7 +116,7 @@ SSH into the control node and follow the steps below:
 - Playbooks are located in the /etc/ansible path and has yml extension.
 - Hosts file in ansible contains the hosts for which the playbook would be run against /etc/ansible/hosts
 - Navigate to the following URL to confirm if the Kibana is running - http://137.135.24.201:5601/app/kibana (Public IP of the ELK server)
-  https://github.com/saib2018/Cybersec2021/blob/main/Diagrams/Kibana1.PNG
+ ![Kibana1](Diagrams/Kibana1.PNG)
 
 - The easiest way to copy the playbooks is to use Git:
 
