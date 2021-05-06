@@ -74,15 +74,27 @@ To deploy the playbook, following steps were performed
  - Ran the command "docker container list -a" to identify the containers running
  - Used the command "docker container start {container-name}" and "docker container attach {container-name}" to log into the ansible container
  - Confirmed that ansible host files had the required server IPs listed which were target machines
+ ![nano](Diagrams/nano.PNG)
+ 
  - Confirmed that ansible configuration files had the remote user setup to the admin user of the target machine
+ ![Remote_user_config](Diagrams/Remote_user_config.PNG)
+ 
  - After preparing the playbook file as described below, ran the playbook using the command ansible-playbook filebeat-playbook.yml which is located in /etc/ansible folder
 
 The playbook implements the following tasks:
 
 - The header of the Ansible playbook can specify a different group of machines as well as a different remote user
+![header](Diagrams/header.PNG)
+
 - Before you can run the elk container, we need to increase the memory as this is a system requirement for the ELK container
+![systemctl](Diagrams/systemctl.PNG)
+
 - The playbook should then install the following services: docker.io, python3-pip and docker, which is the Docker Python pip module
+![installmodule](Diagrams/installmodule.PNG)
+
 - After Docker is installed, download and run the sebp/elk:761 container.The container should be started with these published ports: 5601:5601, 9200:9200 and 5044:5044
+![port](Diagrams/port.PNG)
+
 - Complete Filebeat-Playbook listed here - https://github.com/saib2018/Cybersec2021/blob/main/Ansible/ansible/filebeat-playbook.yml
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
